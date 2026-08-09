@@ -2630,11 +2630,11 @@
         <div class="step step-1"></div>
     </div>
 
-    <!-- UI Overlay (Outlined Gold Greeting & Enter) -->
+   <!-- UI Overlay (Outlined Gold Greeting & Enter) -->
     <div class="content" id="mainContent">
         <h1>For My Special One</h1>
         <p>A magical journey awaits you</p>
-        <button class="enter-btn" onclick="openGates()">Enter</button>
+        <button class="enter-btn">Enter</button>
     </div>
 
     <!-- White Flash Transition Screen -->
@@ -3213,13 +3213,13 @@
         </div>
     </div>
 
-    <div id="phase4-container">
+   <div id="phase4-container">
         <!-- Audio element looping behind the story -->
         <audio id="memory1-audio" src="memory1.mp3" loop></audio>
 
         <div class="comic-viewer-wrapper">
             <!-- Story image container -->
-            <img id="comic-story-img" class="comic-image" src="ChatGPT Image Aug 3, 2026, 07_22_16 PM.png" alt="Memory Comic Story">
+            <img id="comic-story-img" class="comic-image" src="story-image.png" alt="Memory Comic Story">
             <div class="comic-overlay"></div>
             
 
@@ -3245,6 +3245,8 @@
             const whiteFlash = document.getElementById('whiteFlash');
             const birthdayCard = document.getElementById('birthdayCard');
             
+            if (!mainContent || !leftGate || !rightGate) return;
+
             // 1. Instantly fade out title text and buttons
             mainContent.style.opacity = '0';
             mainContent.style.transform = 'translate(-50%, -50%) scale(0.9) translateY(-10px)';
@@ -3517,6 +3519,11 @@
             if (beginBtn) {
                 beginBtn.onclick = null; // Clear inline onclick to avoid duplicate calls
                 beginBtn.addEventListener('click', beginJourney);
+            }
+            const enterBtn = document.querySelector('.enter-btn');
+            if (enterBtn) {
+                enterBtn.style.touchAction = 'manipulation';
+                enterBtn.addEventListener('click', openGates);
             }
         }
         if (document.readyState === 'loading') {
